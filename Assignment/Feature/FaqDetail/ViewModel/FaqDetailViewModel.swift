@@ -23,14 +23,23 @@ final class FaqDetailViewModel: FaqDetailViewModelType {
         self.faqElements = faqElements
     }
 
+    
+    /// Get title text based on type
+    /// - Returns: title text as String
     func getTitle() -> String {
         return faqElements.first(where: { $0.type == "title" })?.text ?? ""
     }
 
+    
+    /// Get body based on type
+    /// - Returns: body text as string
     func getBody() -> String {
         return faqElements.first(where: { $0.type == "body" })?.text ?? ""
     }
 
+    
+    /// Get urlString and title based on type
+    /// - Returns: tuple of title and url, both are String
     func getAction() -> (title: String, url: String) {
         let faqElement = faqElements.first(where: { $0.type == "button" })
         return (title: faqElement?.text ?? "", url: faqElement?.action ?? "")
