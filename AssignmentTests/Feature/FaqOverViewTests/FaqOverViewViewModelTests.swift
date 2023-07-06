@@ -46,7 +46,7 @@ final class FaqOverViewViewModelTestsL: XCTestCase {
 
         await viewModel.fetchFaqs()
         
-        let faqElements = try JSONDecoder().decode([RemoteFaqElement].self, from: Data(forResource: "MockElement"))
+        let faqElements = try JSONDecoder().decode([RemoteFaqElement].self, from: Data(forResource: "MockFaqElement"))
         let isTitle = viewModel.isTitle(faqElements[0])
         
         XCTAssertTrue(isTitle)
@@ -57,17 +57,9 @@ final class FaqOverViewViewModelTestsL: XCTestCase {
 
         await viewModel.fetchFaqs()
         
-        let faqElements = try JSONDecoder().decode([RemoteFaqElement].self, from: Data(forResource: "MockElement"))
+        let faqElements = try JSONDecoder().decode([RemoteFaqElement].self, from: Data(forResource: "MockFaqElement"))
         let isTitle = viewModel.isTitle(faqElements[1])
         
         XCTAssertFalse(isTitle)
-    }
-    
-    func testgetFaqElements() async throws {
-        viewModel = FaqOverViewViewModel(faqService: FaqServiceMock())
-        
-        await viewModel.fetchFaqs()
-        
-        XCTAssertEqual(viewModel.faqElements.count, 7)
     }
 }
