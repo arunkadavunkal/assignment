@@ -27,6 +27,7 @@ final class FaqOverViewViewModel: FaqOverViewModelType {
         self.faqService = faqService
     }
 
+    /// fetching Faqs from FaqService
     func fetchFaqs() async {
         self.fetchStatus = .processing
         do {
@@ -36,8 +37,10 @@ final class FaqOverViewViewModel: FaqOverViewModelType {
             self.fetchStatus = .error(error.localizedDescription)
         }
     }
-
-    // MARK: is type of title
+    
+    /// for checking passed element's type is title
+    /// - Parameter faqElement: RemoteFaqElement passing from View
+    /// - Returns: if paramenter RemoteFaqElement type is "title"
     func isTitle(_ faqElement: RemoteFaqElement) -> Bool {
         return faqElement.type == "title"
     }
