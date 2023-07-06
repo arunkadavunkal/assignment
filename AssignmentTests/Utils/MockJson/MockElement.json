@@ -1,0 +1,12 @@
+
+[
+    {
+        "type": "title",
+        "text": "More information",
+    },
+    {
+        "type": "button",
+        "text": "More information",
+        "action": "https://developer.apple.com/documentation/swift/dictionary"
+    }
+]

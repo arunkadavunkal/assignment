@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Service
+import Combine
 
 private extension CGFloat {
     static let viewPadding: CGFloat = 20
@@ -20,12 +21,22 @@ final class FaqOverviewViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIStackView().verticalCard(spacing: 0)
     private let titleLabel = UILabel(text: "FAQ Overview").title()
+    private var viewModel: FaqOverViewModelType = FaqOverViewViewModel(faqService: FaqService())
+    private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupContent()
+        fetchFaqs()
     }
+
+    private func fetchFaqs() {
+        Task {
+            await viewModel.fetchFaqs()
+        }
+    }
+
 }
 
 private extension FaqOverviewViewController {
@@ -61,23 +72,34 @@ private extension FaqOverviewViewController {
             self.navigationController?.pushViewController(FaqDetailViewController(), animated: true)
         }
 
+        let retryButton = UIButton(text: "Retry")
         contentView.addArrangedSubview(titleLabel)
         contentView.setCustomSpacing(.itemMargin, after: titleLabel)
+        contentView.addArrangedSubview(retryButton)
 
-        // The retry button to show if data loading fails
-        contentView.addArrangedSubview(UIButton(text: "Retry").primary {
-            // Execute action
-        })
+        viewModel.fetchStatusPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] fetchStatus in
+                guard let self else { return }
+                switch fetchStatus {
+                case .processing:
+                    break
+                case .success:
+                    viewModel.faqElements.forEach { faqElement in
+                        if self.viewModel.isTitle(faqElement) {
+                            let faqOverViewItem = FaqOverviewItemView(faqElement.text)
+                            self.contentView.addArrangedSubview(faqOverViewItem)
+                            self.contentView.addArrangedSubview(UIView().divider())
+                        }
+                    }
+                    retryButton.isHidden = true
+                case .error:
+                    retryButton.isHidden = false
+                    retryButton.primary {
+                        self.fetchFaqs()
+                    }
+                }
+            }.store(in: &cancellables)
 
-        // The Items to show if data loading succeeds
-        (0...5).forEach { i in
-            if i > 0 {
-                contentView.addArrangedSubview(UIView().divider())
-            }
-
-            let item = FaqOverviewItemView("Question #\(i)")
-            item.addAction(action, for: .touchUpInside)
-            contentView.addArrangedSubview(item)
-        }
     }
 }
