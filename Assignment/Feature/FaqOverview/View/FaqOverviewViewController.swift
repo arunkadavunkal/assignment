@@ -20,12 +20,21 @@ final class FaqOverviewViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIStackView().verticalCard(spacing: 0)
     private let titleLabel = UILabel(text: "FAQ Overview").title()
+    private var viewModel: FaqOverViewModelType = FaqOverViewViewModel(faqService: FaqService())
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupContent()
+        fetchFaqs()
     }
+
+    private func fetchFaqs() {
+        Task {
+            viewModel.fetchFaqs
+        }
+    }
+
 }
 
 private extension FaqOverviewViewController {

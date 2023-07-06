@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00315C032A573E7900B845D8 /* FaqOverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C022A573E7900B845D8 /* FaqOverViewViewModel.swift */; };
 		F8B6D39B2A55A8A800ACE890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39A2A55A8A800ACE890 /* AppDelegate.swift */; };
 		F8B6D39D2A55A8A800ACE890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39C2A55A8A800ACE890 /* SceneDelegate.swift */; };
 		F8B6D39F2A55A8A800ACE890 /* FaqOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39E2A55A8A800ACE890 /* FaqOverviewViewController.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00315C022A573E7900B845D8 /* FaqOverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqOverViewViewModel.swift; sourceTree = "<group>"; };
 		F8B6D3972A55A8A800ACE890 /* Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B6D39A2A55A8A800ACE890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8B6D39C2A55A8A800ACE890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00315C002A573E4500B845D8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				00315C022A573E7900B845D8 /* FaqOverViewViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		00315C012A573E4C00B845D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F8B6D3D52A55AD1500ACE890 /* FaqOverviewItemView.swift */,
+				F8B6D39E2A55A8A800ACE890 /* FaqOverviewViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F8B6D38E2A55A8A800ACE890 = {
 			isa = PBXGroup;
 			children = (
@@ -183,8 +202,8 @@
 		F8B6D3D12A55AC4900ACE890 /* FaqOverview */ = {
 			isa = PBXGroup;
 			children = (
-				F8B6D39E2A55A8A800ACE890 /* FaqOverviewViewController.swift */,
-				F8B6D3D52A55AD1500ACE890 /* FaqOverviewItemView.swift */,
+				00315C012A573E4C00B845D8 /* View */,
+				00315C002A573E4500B845D8 /* ViewModel */,
 			);
 			path = FaqOverview;
 			sourceTree = "<group>";
@@ -396,6 +415,7 @@
 				F8B6D39F2A55A8A800ACE890 /* FaqOverviewViewController.swift in Sources */,
 				F8B6D3EA2A55E14E00ACE890 /* UINavigationController+styled.swift in Sources */,
 				F8B6D39B2A55A8A800ACE890 /* AppDelegate.swift in Sources */,
+				00315C032A573E7900B845D8 /* FaqOverViewViewModel.swift in Sources */,
 				F8B6D3E82A55E0DD00ACE890 /* UIImageView+styled.swift in Sources */,
 				F8B6D3DC2A55DE4E00ACE890 /* UIStackView+styled.swift in Sources */,
 				F8B6D3EF2A55E7AF00ACE890 /* UIButton+styled.swift in Sources */,
