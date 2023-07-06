@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		00315C032A573E7900B845D8 /* FaqOverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C022A573E7900B845D8 /* FaqOverViewViewModel.swift */; };
 		00315C062A5741E500B845D8 /* FetchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C052A5741E500B845D8 /* FetchStatus.swift */; };
+		00315C092A57465800B845D8 /* FaqOverViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C082A57465800B845D8 /* FaqOverViewViewModelTests.swift */; };
+		00315C0C2A57470C00B845D8 /* FaqServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C0B2A57470C00B845D8 /* FaqServiceMock.swift */; };
+		00315C0F2A574A3200B845D8 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C0E2A574A3200B845D8 /* Data+Extension.swift */; };
+		00315C122A574A7900B845D8 /* MockFaqs.json in Resources */ = {isa = PBXBuildFile; fileRef = 00315C112A574A7900B845D8 /* MockFaqs.json */; };
+		00315C142A57507A00B845D8 /* MockElement.json in Resources */ = {isa = PBXBuildFile; fileRef = 00315C132A57507A00B845D8 /* MockElement.json */; };
 		F8B6D39B2A55A8A800ACE890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39A2A55A8A800ACE890 /* AppDelegate.swift */; };
 		F8B6D39D2A55A8A800ACE890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39C2A55A8A800ACE890 /* SceneDelegate.swift */; };
 		F8B6D39F2A55A8A800ACE890 /* FaqOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39E2A55A8A800ACE890 /* FaqOverviewViewController.swift */; };
@@ -68,6 +73,11 @@
 /* Begin PBXFileReference section */
 		00315C022A573E7900B845D8 /* FaqOverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqOverViewViewModel.swift; sourceTree = "<group>"; };
 		00315C052A5741E500B845D8 /* FetchStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStatus.swift; sourceTree = "<group>"; };
+		00315C082A57465800B845D8 /* FaqOverViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqOverViewViewModelTests.swift; sourceTree = "<group>"; };
+		00315C0B2A57470C00B845D8 /* FaqServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqServiceMock.swift; sourceTree = "<group>"; };
+		00315C0E2A574A3200B845D8 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		00315C112A574A7900B845D8 /* MockFaqs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockFaqs.json; sourceTree = "<group>"; };
+		00315C132A57507A00B845D8 /* MockElement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockElement.json; sourceTree = "<group>"; };
 		F8B6D3972A55A8A800ACE890 /* Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B6D39A2A55A8A800ACE890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8B6D39C2A55A8A800ACE890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +158,40 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		00315C072A57463400B845D8 /* FaqOverViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				00315C082A57465800B845D8 /* FaqOverViewViewModelTests.swift */,
+			);
+			path = FaqOverViewTests;
+			sourceTree = "<group>";
+		};
+		00315C0A2A5746F900B845D8 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				00315C0B2A57470C00B845D8 /* FaqServiceMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		00315C0D2A574A0100B845D8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				00315C102A574A4700B845D8 /* MockJson */,
+				00315C0E2A574A3200B845D8 /* Data+Extension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		00315C102A574A4700B845D8 /* MockJson */ = {
+			isa = PBXGroup;
+			children = (
+				00315C112A574A7900B845D8 /* MockFaqs.json */,
+				00315C132A57507A00B845D8 /* MockElement.json */,
+			);
+			path = MockJson;
+			sourceTree = "<group>";
+		};
 		F8B6D38E2A55A8A800ACE890 = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +228,9 @@
 		F8B6D3B02A55A8A900ACE890 /* AssignmentTests */ = {
 			isa = PBXGroup;
 			children = (
+				00315C0D2A574A0100B845D8 /* Utils */,
+				00315C0A2A5746F900B845D8 /* Mocks */,
+				00315C072A57463400B845D8 /* FaqOverViewTests */,
 				F8B6D3B12A55A8A900ACE890 /* AssignmentTests.swift */,
 			);
 			path = AssignmentTests;
@@ -401,6 +448,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00315C142A57507A00B845D8 /* MockElement.json in Resources */,
+				00315C122A574A7900B845D8 /* MockFaqs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +489,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00315C0C2A57470C00B845D8 /* FaqServiceMock.swift in Sources */,
+				00315C0F2A574A3200B845D8 /* Data+Extension.swift in Sources */,
+				00315C092A57465800B845D8 /* FaqOverViewViewModelTests.swift in Sources */,
 				F8B6D3B22A55A8A900ACE890 /* AssignmentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
