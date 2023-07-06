@@ -1,0 +1,31 @@
+disabled_rules:
+- identifier_name
+
+analyzer_rules:
+- unused_import
+
+opt_in_rules:
+- empty_count
+- contains_over_filter_count
+- contains_over_filter_is_empty
+- contains_over_first_not_nil
+- contains_over_range_nil_comparison
+- yoda_condition
+- shorthand_optional_binding
+
+custom_rules:
+  multiple_spaces_on_one_line:
+    name: "Multiple Space on one line"
+    message: "Use only one space"
+    regex: '(\d|\w|\]|\[|\}|\{|-|_)[ ]{2,}(\d|\w|\]|\[|\}|\{|-|_)'
+    severity: error
+  single_space_before_or_after_assing:
+    name: "Multiple Space After Assign"
+    message: "Use only one space before and after an assign"
+    regex: '(\S[ ]{2,}=)|(=[ ]{2,}\S)'
+    severity: error
+  single_space_before_or_after_return_statement:
+    name: "Multiple Space After Assign"
+    message: "Use only one space before and after return statement"
+    regex: '(\S[ ]{2,}->)|(->[ ]{2,}\S)'
+    severity: error
