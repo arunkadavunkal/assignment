@@ -68,8 +68,12 @@ private extension FaqOverviewViewController {
 
     func setupContent() {
 
-        let action = UIAction { _ in
-            self.navigationController?.pushViewController(FaqDetailViewController(), animated: true)
+        let action = UIAction { [weak self] action in
+            guard let index = (action.sender as? FaqOverviewItemView)?.tag,
+            let self else { return }
+            let faqDetailViewController = FaqDetailViewController()
+            faqDetailViewController.viewModel = FaqDetailViewModel(faqElements: self.viewModel.faqs[index].elements)
+            self.navigationController?.pushViewController(faqDetailViewController, animated: true)
         }
 
         let retryButton = UIButton(text: "Retry")
@@ -85,12 +89,13 @@ private extension FaqOverviewViewController {
                 case .processing:
                     break
                 case .success:
-                    viewModel.faqElements.forEach { faqElement in
-                        if self.viewModel.isTitle(faqElement) {
-                            let faqOverViewItem = FaqOverviewItemView(faqElement.text)
-                            self.contentView.addArrangedSubview(faqOverViewItem)
-                            self.contentView.addArrangedSubview(UIView().divider())
-                        }
+                    for (index, faq) in viewModel.faqs.enumerated() {
+                        let faqElement = faq.elements.filter { $0.type == "title" }
+                        let faqOverViewItem = FaqOverviewItemView(faqElement.first?.text ?? "")
+                        faqOverViewItem.tag = index
+                        faqOverViewItem.addAction(action, for: .touchUpInside)
+                        self.contentView.addArrangedSubview(faqOverViewItem)
+                        self.contentView.addArrangedSubview(UIView().divider())
                     }
                     retryButton.isHidden = true
                 case .error:

@@ -16,6 +16,7 @@ final class FaqDetailViewController: UIViewController {
     private let headerBackground = UIView().headerCard()
     private let scrollView = UIScrollView()
     private let contentView = UIStackView().verticalCard()
+    var viewModel: FaqDetailViewModelType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,16 +52,13 @@ private extension FaqDetailViewController {
     }
 
     func setupContent() {
-
-        // example Title Element
-        contentView.addArrangedSubview(UILabel(text: "Title").title())
-
-        // example Body Element
-        contentView.addArrangedSubview(UILabel(text: "Body").body())
-
-        // example Button Element
-        contentView.addArrangedSubview(UIButton(text: "Button").primary {
-            // Execute Action
+        guard let viewModel else { return }
+        contentView.addArrangedSubview(UILabel(text: viewModel.getTitle()).title())
+        contentView.addArrangedSubview(UILabel(text: viewModel.getBody()).body())
+        let buttonElements = viewModel.getAction()
+        contentView.addArrangedSubview(UIButton(text: buttonElements.title).primary {
+            guard let url = URL(string: buttonElements.url) else { return }
+            UIApplication.shared.open(url)
         })
     }
 }
