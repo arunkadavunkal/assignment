@@ -37,7 +37,7 @@ final class FaqOverViewViewModel: FaqOverViewModelType {
             self.fetchStatus = .error(error.localizedDescription)
         }
     }
-    
+
     /// for checking passed element's type is title
     /// - Parameter faqElement: RemoteFaqElement passing from View
     /// - Returns: if paramenter RemoteFaqElement type is "title"
