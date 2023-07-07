@@ -47,4 +47,22 @@ final class FaqOverViewViewModelTests: XCTestCase {
         let faqElements = viewModel.faqs[0].elements
         XCTAssertEqual(viewModel.filterTitleElements(from: faqElements).count, 1)
     }
+
+    func testIsShowDividerTrue() async throws {
+        let serviceMock = FaqServiceMock()
+        let viewModel = FaqOverViewViewModel(faqService: serviceMock)
+
+        await viewModel.fetchFaqs()
+
+        XCTAssertTrue(viewModel.isShowDivider(index: 0))
+    }
+
+    func testIsShowDividerFalse() async throws {
+        let serviceMock = FaqServiceMock()
+        let viewModel = FaqOverViewViewModel(faqService: serviceMock)
+
+        await viewModel.fetchFaqs()
+
+        XCTAssertFalse(viewModel.isShowDivider(index: 1))
+    }
 }

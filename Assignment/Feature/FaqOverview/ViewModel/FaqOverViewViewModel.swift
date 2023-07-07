@@ -39,10 +39,18 @@ final class FaqOverViewViewModel: FaqOverViewModelType {
         }
     }
 
+
+    /// Filtering [RemoteFaqElement] based on type title
+    /// - Parameter faqElements: [RemoteFaqElement] passed from view
+    /// - Returns: [RemoteFaqElement] filtered based on type "title"
     func filterTitleElements(from faqElements: [RemoteFaqElement]) -> [RemoteFaqElement] {
         return faqElements.filter({ $0.isTitle })
     }
 
+
+    /// For showing divider
+    /// - Parameter index: index passed from view
+    /// - Returns: bool to determine divider showing
     func isShowDivider(index: Int) -> Bool {
         return index < (faqs.count - 1)
     }
