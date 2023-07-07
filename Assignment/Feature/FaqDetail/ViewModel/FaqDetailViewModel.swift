@@ -10,9 +10,7 @@ import Service
 
 protocol FaqDetailViewModelType {
     var faqElements: [RemoteFaqElement] { get }
-    func getFaqElementsForUI() -> (titles: [String],
-                                   bodys: [String],
-                                   actions: [(title: String, url: String)])
+    func getFaqElementsForUI() -> FaqUICompactableElements
 }
 
 final class FaqDetailViewModel: FaqDetailViewModelType {
@@ -23,14 +21,12 @@ final class FaqDetailViewModel: FaqDetailViewModelType {
         self.faqElements = faqElements
     }
 
-
     /// get elements from RemoteFaqElemet for creating dynamic UI
-    /// - Returns: titles: type of [String] when type is "title",
-    /// bodys: type of [String] when type is "body",
-    ///actions: array of tuple [(title: String, url: String)]; title is "text" and url is "action"
-    func getFaqElementsForUI() -> (titles: [String],
-                                   bodys: [String],
-                                   actions: [(title: String, url: String)]) {
+    /// - Returns: FaqUICompactableElements contains;
+    ///  titles - array of string where type is title
+    ///  bodys - array of String where type is body
+    ///  array of tupe containing title as String and url as Srting where type is button
+    func getFaqElementsForUI() -> FaqUICompactableElements {
 
         var titles: [String] = []
         var bodys: [String] = []
@@ -49,6 +45,8 @@ final class FaqDetailViewModel: FaqDetailViewModelType {
                 actions.append((title: faqElement.text, url: faqElement.action ?? ""))
             }
         }
-        return (titles: titles, bodys: bodys, actions: actions)
+        return FaqUICompactableElements(titles: titles,
+                                        bodys: bodys,
+                                        actions: actions)
     }
 }
