@@ -9,6 +9,10 @@
         "text": "Suggested approach: It’s all down to how you access data: arrays must be accessed using the index of each element, whereas dictionaries can be accessed using something you define – strings are very common. Make sure and give practical examples of where each would be used."
     },
     {
+        "type": "body",
+        "text": "For bonus points you could mention that classes have deinit() methods and structs do not."
+    },
+    {
         "type": "button",
         "text": "More information",
         "action": "https://developer.apple.com/documentation/swift/dictionary"

@@ -21,6 +21,7 @@ final class FaqOverviewViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIStackView().verticalCard(spacing: 0)
     private let titleLabel = UILabel(text: "FAQ Overview").title()
+    private let retryButton = UIButton(text: "Retry")
     private var viewModel: FaqOverViewModelType = FaqOverViewViewModel(faqService: FaqService())
     private var cancellables = Set<AnyCancellable>()
 
@@ -28,6 +29,7 @@ final class FaqOverviewViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupContent()
+        listenToFetch()
         fetchFaqs()
     }
 
@@ -67,20 +69,23 @@ private extension FaqOverviewViewController {
     }
 
     func setupContent() {
+        contentView.addArrangedSubview(titleLabel)
+        contentView.setCustomSpacing(.itemMargin, after: titleLabel)
+        contentView.addArrangedSubview(retryButton)
+    }
 
+    func actionForNavigateToFaqDetilView() -> UIAction {
         let action = UIAction { [weak self] action in
             guard let index = (action.sender as? FaqOverviewItemView)?.tag,
-            let self else { return }
+                  let self else { return }
             let faqDetailViewController = FaqDetailViewController()
             faqDetailViewController.viewModel = FaqDetailViewModel(faqElements: self.viewModel.faqs[index].elements)
             self.navigationController?.pushViewController(faqDetailViewController, animated: true)
         }
+        return action
+    }
 
-        let retryButton = UIButton(text: "Retry")
-        contentView.addArrangedSubview(titleLabel)
-        contentView.setCustomSpacing(.itemMargin, after: titleLabel)
-        contentView.addArrangedSubview(retryButton)
-
+    func listenToFetch() {
         viewModel.fetchStatusPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] fetchStatus in
@@ -89,14 +94,7 @@ private extension FaqOverviewViewController {
                 case .processing:
                     break
                 case .success:
-                    for (index, faq) in viewModel.faqs.enumerated() {
-                        let faqElement = faq.elements.filter { $0.type == "title" }
-                        let faqOverViewItem = FaqOverviewItemView(faqElement.first?.text ?? "")
-                        faqOverViewItem.tag = index
-                        faqOverViewItem.addAction(action, for: .touchUpInside)
-                        self.contentView.addArrangedSubview(faqOverViewItem)
-                        self.contentView.addArrangedSubview(UIView().divider())
-                    }
+                    updateUI()
                     retryButton.isHidden = true
                 case .error:
                     retryButton.isHidden = false
@@ -105,6 +103,18 @@ private extension FaqOverviewViewController {
                     }
                 }
             }.store(in: &cancellables)
+    }
 
+    func updateUI() {
+        for (index, faq) in self.viewModel.faqs.enumerated() {
+            let faqElement = self.viewModel.filterTitleElements(from: faq.elements)
+            let faqOverViewItem = FaqOverviewItemView(faqElement.first?.text ?? "")
+            faqOverViewItem.tag = index
+            faqOverViewItem.addAction(actionForNavigateToFaqDetilView(), for: .touchUpInside)
+            self.contentView.addArrangedSubview(faqOverViewItem)
+            if viewModel.isShowDivider(index: index) {
+                self.contentView.addArrangedSubview(UIView().divider())
+            }
+        }
     }
 }

@@ -13,14 +13,15 @@ protocol FaqOverViewModelType {
     func fetchFaqs() async
     var fetchStatusPublisher: Published<FetchStatus>.Publisher { get }
     var faqs: [RemoteFaq] { get }
-    func isTitle(_ faqElement: RemoteFaqElement) -> Bool
+    func filterTitleElements(from faqElements: [RemoteFaqElement]) -> [RemoteFaqElement]
+    func isShowDivider(index: Int) -> Bool
 }
 
 final class FaqOverViewViewModel: FaqOverViewModelType {
 
     let faqService: FaqServiceProtocol
-    var faqs: [RemoteFaq] = []
-    @Published var fetchStatus: FetchStatus = .processing
+    private(set) var faqs: [RemoteFaq] = []
+    @Published private(set) var fetchStatus: FetchStatus = .processing
     var fetchStatusPublisher: Published<FetchStatus>.Publisher { $fetchStatus }
 
     init(faqService: FaqServiceProtocol = FaqService()) {
@@ -38,10 +39,11 @@ final class FaqOverViewViewModel: FaqOverViewModelType {
         }
     }
 
-    /// for checking passed element's type is title
-    /// - Parameter faqElement: RemoteFaqElement passing from View
-    /// - Returns: if paramenter RemoteFaqElement type is "title"
-    func isTitle(_ faqElement: RemoteFaqElement) -> Bool {
-        return faqElement.type == "title"
+    func filterTitleElements(from faqElements: [RemoteFaqElement]) -> [RemoteFaqElement] {
+        return faqElements.filter({ $0.isTitle })
+    }
+
+    func isShowDivider(index: Int) -> Bool {
+        return index < (faqs.count - 1)
     }
 }

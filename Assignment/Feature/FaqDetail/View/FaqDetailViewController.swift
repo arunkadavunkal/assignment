@@ -53,12 +53,20 @@ private extension FaqDetailViewController {
 
     func setupContent() {
         guard let viewModel else { return }
-        contentView.addArrangedSubview(UILabel(text: viewModel.getTitle()).title())
-        contentView.addArrangedSubview(UILabel(text: viewModel.getBody()).body())
-        let buttonElements = viewModel.getAction()
-        contentView.addArrangedSubview(UIButton(text: buttonElements.title).primary {
-            guard let url = URL(string: buttonElements.url) else { return }
-            UIApplication.shared.open(url)
-        })
+        let elements = viewModel.getFaqElementsForUI()
+        elements.titles.forEach { title in
+            contentView.addArrangedSubview(UILabel(text: title).title())
+        }
+
+        elements.bodys.forEach { body in
+            contentView.addArrangedSubview(UILabel(text: body).body())
+        }
+
+        elements.actions.forEach { title, url in
+            contentView.addArrangedSubview(UIButton(text: title).primary {
+                guard let url = URL(string: url) else { return }
+                UIApplication.shared.open(url)
+            })
+        }
     }
 }

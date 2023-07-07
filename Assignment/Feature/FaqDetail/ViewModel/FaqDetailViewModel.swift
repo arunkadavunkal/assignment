@@ -10,9 +10,7 @@ import Service
 
 protocol FaqDetailViewModelType {
     var faqElements: [RemoteFaqElement] { get }
-    func getTitle() -> String
-    func getBody() -> String
-    func getAction() -> (title: String, url: String)
+    func getFaqElementsForUI() -> FaqUICompactableElements
 }
 
 final class FaqDetailViewModel: FaqDetailViewModelType {
@@ -23,22 +21,32 @@ final class FaqDetailViewModel: FaqDetailViewModelType {
         self.faqElements = faqElements
     }
 
-    /// Get title text based on type
-    /// - Returns: title text as String
-    func getTitle() -> String {
-        return faqElements.first(where: { $0.type == "title" })?.text ?? ""
-    }
+    /// get elements from RemoteFaqElemet for creating dynamic UI
+    /// - Returns: FaqUICompactableElements contains;
+    ///  titles - array of string where type is title
+    ///  bodys - array of String where type is body
+    ///  array of tupe containing title as String and url as Srting where type is button
+    func getFaqElementsForUI() -> FaqUICompactableElements {
 
-    /// Get body based on type
-    /// - Returns: body text as string
-    func getBody() -> String {
-        return faqElements.first(where: { $0.type == "body" })?.text ?? ""
-    }
+        var titles: [String] = []
+        var bodys: [String] = []
+        var actions: [(title: String, url: String)] = []
 
-    /// Get urlString and title based on type
-    /// - Returns: tuple of title and url, both are String
-    func getAction() -> (title: String, url: String) {
-        let faqElement = faqElements.first(where: { $0.type == "button" })
-        return (title: faqElement?.text ?? "", url: faqElement?.action ?? "")
+        for faqElement in faqElements {
+            if faqElement.isTitle {
+                titles.append(faqElement.text)
+            }
+
+            if faqElement.isBody {
+                bodys.append(faqElement.text)
+            }
+
+            if faqElement.isButton {
+                actions.append((title: faqElement.text, url: faqElement.action ?? ""))
+            }
+        }
+        return FaqUICompactableElements(titles: titles,
+                                        bodys: bodys,
+                                        actions: actions)
     }
 }
