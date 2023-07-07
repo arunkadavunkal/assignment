@@ -11,26 +11,23 @@ import Combine
 import Service
 @testable import Assignment
 
-final class FaqOverViewViewModelTestsL: XCTestCase {
-    
-    var viewModel: FaqOverViewModelType!
-    var cancellables = Set<AnyCancellable>()
-    
+final class FaqOverViewViewModelTests: XCTestCase {
+
     func testFetchFaqs() async throws {
-        viewModel = FaqOverViewViewModel(faqService: FaqServiceMock())
+        let viewModel = FaqOverViewViewModel(faqService: FaqServiceMock())
         
         await viewModel.fetchFaqs()
         
         XCTAssertEqual(viewModel.faqs.count, 2)
         viewModel.fetchStatusPublisher.sink { fetchStatus in
             XCTAssertEqual(fetchStatus, .success)
-        }.store(in: &cancellables)
+        }.cancel()
     }
     
     func testFetchFailed() async throws {
         let serviceMock = FaqServiceMock()
         serviceMock.isFailed = true
-        viewModel = FaqOverViewViewModel(faqService: serviceMock)
+        let viewModel = FaqOverViewViewModel(faqService: serviceMock)
         
 
         await viewModel.fetchFaqs()
@@ -38,28 +35,16 @@ final class FaqOverViewViewModelTestsL: XCTestCase {
         XCTAssertEqual(viewModel.faqs.count, 0)
         viewModel.fetchStatusPublisher.sink { fetchStatus in
             XCTAssertEqual(fetchStatus, .error("error while fetching"))
-        }.store(in: &cancellables)
+        }.cancel()
     }
     
-    func testIsTitleReturnsTrue() async throws {
-        viewModel = FaqOverViewViewModel(faqService: FaqServiceMock())
+    func testFilterTitleElementsFromAllFaqElements() async throws {
+        let serviceMock = FaqServiceMock()
+        let viewModel = FaqOverViewViewModel(faqService: serviceMock)
 
         await viewModel.fetchFaqs()
-        
-        let faqElements = try JSONDecoder().decode([RemoteFaqElement].self, from: Data(forResource: "MockFaqElement"))
-        let isTitle = viewModel.isTitle(faqElements[0])
-        
-        XCTAssertTrue(isTitle)
-    }
-    
-    func testIsTitleReturnsFalse() async throws {
-        viewModel = FaqOverViewViewModel(faqService: FaqServiceMock())
 
-        await viewModel.fetchFaqs()
-        
-        let faqElements = try JSONDecoder().decode([RemoteFaqElement].self, from: Data(forResource: "MockFaqElement"))
-        let isTitle = viewModel.isTitle(faqElements[1])
-        
-        XCTAssertFalse(isTitle)
+        let faqElements = viewModel.faqs[0].elements
+        XCTAssertEqual(viewModel.filterTitleElements(from: faqElements).count, 1)
     }
 }

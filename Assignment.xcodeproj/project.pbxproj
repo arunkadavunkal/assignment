@@ -17,6 +17,7 @@
 		00315C162A57594F00B845D8 /* FaqDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C152A57594F00B845D8 /* FaqDetailViewModel.swift */; };
 		00315C1D2A576E9100B845D8 /* FaqDeatilViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315C1C2A576E9100B845D8 /* FaqDeatilViewModelTests.swift */; };
 		00315C212A57720B00B845D8 /* MockFaqElements.json in Resources */ = {isa = PBXBuildFile; fileRef = 00315C202A57720B00B845D8 /* MockFaqElements.json */; };
+		1F2B27132A58303E00575DF2 /* RemoteFaqElement+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B27122A58303E00575DF2 /* RemoteFaqElement+Extension.swift */; };
 		F8B6D39B2A55A8A800ACE890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39A2A55A8A800ACE890 /* AppDelegate.swift */; };
 		F8B6D39D2A55A8A800ACE890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39C2A55A8A800ACE890 /* SceneDelegate.swift */; };
 		F8B6D39F2A55A8A800ACE890 /* FaqOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B6D39E2A55A8A800ACE890 /* FaqOverviewViewController.swift */; };
@@ -84,6 +85,7 @@
 		00315C152A57594F00B845D8 /* FaqDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqDetailViewModel.swift; sourceTree = "<group>"; };
 		00315C1C2A576E9100B845D8 /* FaqDeatilViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqDeatilViewModelTests.swift; sourceTree = "<group>"; };
 		00315C202A57720B00B845D8 /* MockFaqElements.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockFaqElements.json; sourceTree = "<group>"; };
+		1F2B27122A58303E00575DF2 /* RemoteFaqElement+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteFaqElement+Extension.swift"; sourceTree = "<group>"; };
 		F8B6D3972A55A8A800ACE890 /* Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B6D39A2A55A8A800ACE890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8B6D39C2A55A8A800ACE890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				F8B6D3E72A55E0DD00ACE890 /* UIImageView+styled.swift */,
 				F8B6D3E92A55E14E00ACE890 /* UINavigationController+styled.swift */,
 				F8B6D3EE2A55E7AF00ACE890 /* UIButton+styled.swift */,
+				1F2B27122A58303E00575DF2 /* RemoteFaqElement+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 			files = (
 				00315C162A57594F00B845D8 /* FaqDetailViewModel.swift in Sources */,
 				F8B6D3D62A55AD1500ACE890 /* FaqOverviewItemView.swift in Sources */,
+				1F2B27132A58303E00575DF2 /* RemoteFaqElement+Extension.swift in Sources */,
 				F8B6D3CB2A55A98100ACE890 /* FaqDetailViewController.swift in Sources */,
 				F8B6D3D92A55ADA400ACE890 /* UIColor+styled.swift in Sources */,
 				F8B6D3DE2A55DF3400ACE890 /* UIView+styled.swift in Sources */,

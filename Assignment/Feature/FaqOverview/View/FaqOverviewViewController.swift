@@ -89,8 +89,8 @@ private extension FaqOverviewViewController {
                 case .processing:
                     break
                 case .success:
-                    for (index, faq) in viewModel.faqs.enumerated() {
-                        let faqElement = faq.elements.filter { $0.type == "title" }
+                    for (index, faq) in self.viewModel.faqs.enumerated() {
+                        let faqElement = self.viewModel.filterTitleElements(from: faq.elements)
                         let faqOverViewItem = FaqOverviewItemView(faqElement.first?.text ?? "")
                         faqOverViewItem.tag = index
                         faqOverViewItem.addAction(action, for: .touchUpInside)

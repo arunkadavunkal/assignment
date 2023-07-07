@@ -13,7 +13,7 @@ protocol FaqOverViewModelType {
     func fetchFaqs() async
     var fetchStatusPublisher: Published<FetchStatus>.Publisher { get }
     var faqs: [RemoteFaq] { get }
-    func isTitle(_ faqElement: RemoteFaqElement) -> Bool
+    func filterTitleElements(from faqElements: [RemoteFaqElement]) -> [RemoteFaqElement]
 }
 
 final class FaqOverViewViewModel: FaqOverViewModelType {
@@ -38,10 +38,7 @@ final class FaqOverViewViewModel: FaqOverViewModelType {
         }
     }
 
-    /// for checking passed element's type is title
-    /// - Parameter faqElement: RemoteFaqElement passing from View
-    /// - Returns: if paramenter RemoteFaqElement type is "title"
-    func isTitle(_ faqElement: RemoteFaqElement) -> Bool {
-        return faqElement.type == "title"
+    func filterTitleElements(from faqElements: [RemoteFaqElement]) -> [RemoteFaqElement] {
+        return faqElements.filter({ $0.isTitle })
     }
 }
