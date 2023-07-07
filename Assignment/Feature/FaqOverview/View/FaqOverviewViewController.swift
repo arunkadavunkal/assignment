@@ -105,6 +105,5 @@ private extension FaqOverviewViewController {
                     }
                 }
             }.store(in: &cancellables)
-
     }
 }

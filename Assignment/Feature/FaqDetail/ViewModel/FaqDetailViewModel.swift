@@ -10,9 +10,9 @@ import Service
 
 protocol FaqDetailViewModelType {
     var faqElements: [RemoteFaqElement] { get }
-    func getTitle() -> String
-    func getBody() -> String
-    func getAction() -> (title: String, url: String)
+    func getFaqElementsForUI() -> (titles: [String],
+                                   bodys: [String],
+                                   actions: [(title: String, url: String)])
 }
 
 final class FaqDetailViewModel: FaqDetailViewModelType {
@@ -23,22 +23,32 @@ final class FaqDetailViewModel: FaqDetailViewModelType {
         self.faqElements = faqElements
     }
 
-    /// Get title text based on type
-    /// - Returns: title text as String
-    func getTitle() -> String {
-        return faqElements.first(where: { $0.type == "title" })?.text ?? ""
-    }
 
-    /// Get body based on type
-    /// - Returns: body text as string
-    func getBody() -> String {
-        return faqElements.first(where: { $0.type == "body" })?.text ?? ""
-    }
+    /// get elements from RemoteFaqElemet for creating dynamic UI
+    /// - Returns: titles: type of [String] when type is "title",
+    /// bodys: type of [String] when type is "body",
+    ///actions: array of tuple [(title: String, url: String)]; title is "text" and url is "action"
+    func getFaqElementsForUI() -> (titles: [String],
+                                   bodys: [String],
+                                   actions: [(title: String, url: String)]) {
 
-    /// Get urlString and title based on type
-    /// - Returns: tuple of title and url, both are String
-    func getAction() -> (title: String, url: String) {
-        let faqElement = faqElements.first(where: { $0.type == "button" })
-        return (title: faqElement?.text ?? "", url: faqElement?.action ?? "")
+        var titles: [String] = []
+        var bodys: [String] = []
+        var actions: [(title: String, url: String)] = []
+
+        for faqElement in faqElements {
+            if faqElement.isTitle {
+                titles.append(faqElement.text)
+            }
+
+            if faqElement.isBody {
+                bodys.append(faqElement.text)
+            }
+
+            if faqElement.isButton {
+                actions.append((title: faqElement.text, url: faqElement.action ?? ""))
+            }
+        }
+        return (titles: titles, bodys: bodys, actions: actions)
     }
 }

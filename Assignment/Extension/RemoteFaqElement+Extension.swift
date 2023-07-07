@@ -12,4 +12,12 @@ extension RemoteFaqElement {
     var isTitle: Bool {
         return self.type == "title"
     }
+
+    var isBody: Bool {
+        return self.type == "body"
+    }
+
+    var isButton: Bool {
+        return self.type == "button"
+    }
 }
